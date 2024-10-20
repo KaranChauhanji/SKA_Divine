@@ -1,25 +1,19 @@
-import { Flex, Heading, Link } from '@chakra-ui/react'
-import { useRef } from 'react';
-
+import { Box, Flex, Link, Text } from '@chakra-ui/react'
 
 const Header = () => {
-    const propertyRef = useRef(null);
-  const contactRef = useRef(null);
-
-  const scrollToSection = (ref) => {
-    ref.current.scrollIntoView({ behavior: 'smooth' });
-  };
   return (
-    <div>
-         <Flex as="nav" p={4} justify="space-between" align="center" bg="#0B1523">
-        <Heading size="md">Property Dealing</Heading>
-        <Flex gap={4}>
-          <Link href="#home">Home</Link>
-          <Link onClick={() => scrollToSection(propertyRef)}>Property</Link>
-          <Link onClick={() => scrollToSection(contactRef)}>Contact Us</Link>
+    <Box px={"20px"} bg="#0B1523">
+         <Flex as="nav" p={'10px'} justify="space-between" alignItems="center" >
+        <Text color={'white'}  fontSize={"24px"}>SKA Divine
+          <Text fontSize={"10px"} fontWeight={300} textAlign={'right'}> Elevating Living</Text>
+        </Text>
+        <Flex gap={'15px'} color={"white"} cursor={'pointer'} >
+          <Link _hover={{color:"#2D6095"}} transition={"all .5s"}>Home</Link>
+          <Link _hover={{color:"#2D6095"}} transition={"all .5s"}>Property</Link>
+          <Link _hover={{color:"#2D6095"}} transition={"all .5s"}>Contact Us</Link>
         </Flex>
       </Flex>
-    </div>
+    </Box>
   )
 }
 

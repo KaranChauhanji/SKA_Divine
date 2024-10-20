@@ -1,3 +1,4 @@
+import ContactUs from "./ContactUs"
 import Footer from "./Footer"
 import Header from "./Header"
 import HeroSection from "./HeroSection"
@@ -8,6 +9,7 @@ const Home = () => {
     <div>
      <Header/>
      <HeroSection/>
+     <ContactUs/>
      <Property/>
      <Footer/>
     </div>
