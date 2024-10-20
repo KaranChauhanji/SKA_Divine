@@ -1,186 +1,165 @@
-import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, SimpleGrid, Text, Textarea } from "@chakra-ui/react"
-import { useSendDetailsMutation } from '../Redux/Service/contactService';
-import { useState } from "react";
+'use client'
 
-const InputBox = ({ label, type, placeholder, value, onChange, name }) => {
+import {
+  Container,
+  Flex,
+  Box,
+  Heading,
+  Text,
+  IconButton,
+  Button,
+  VStack,
+  HStack,
+  Wrap,
+  WrapItem,
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Textarea,
+} from '@chakra-ui/react'
+import {
+  MdPhone,
+  MdEmail,
+  MdLocationOn,
+  MdFacebook,
+  MdOutlineEmail,
+} from 'react-icons/md'
+import { BsGithub, BsDiscord, BsPerson } from 'react-icons/bs'
 
+const ContactUs = () =>  {
   return (
-    <FormControl mb={4}>
-      <FormLabel mb={"5px"}>{label}</FormLabel>
-      <Input
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        name={name}
-        bg="white"
-        p={"10px"}
-        border={"1px solid rgba(0,0,0,0.4)"}
-        borderRadius={"5px"}
-        w={'100%'}
-      />
-    </FormControl>
-  );
-};
-
-const ContactUs = () => {
-
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    phone: "",
-    message: "",
-    address: ""
-  });
-
-  const [sendDetails] = useSendDetailsMutation();
-
-  // Handle input change
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  // Handle form submit
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await sendDetails(formData);
-      console.log('Form submitted successfully', response);
-    } catch (error) {
-      console.error('Error submitting form', error);
-    }
-  };
-
-
-  return (
-    <Box>
-      <SimpleGrid
-        my={"30px"}
-        justifyContent="center"
-        h={"100vh"}
-        px={"60px"}
-      >
-
-
-        <SimpleGrid gridTemplateColumns={["1fr","1fr","1fr","1fr 1fr"]} spacing={"20px"} alignItems={"center"} padding={"40px"}>
-
-          <SimpleGrid textAlign={"center"} spacing={"20px"}>
-            <Text fontWeight={700} fontSize={"30px"} lineHeight={"36px"}>Get In Touch</Text>
-            <Text fontWeight={300} fontSize={"18px"} lineHeight={"28px"}>Discover your perfect home—get in touch with us and make your property dreams a reality.</Text>
-
-            <Box border={"1px solid black"} p={"10px"}>
-              <Text fontWeight={700} fontSize={"18px"} lineHeight={"28px"}>Address</Text>
-              <Text fontWeight={400} fontSize={"16px"} lineHeight={"24px"}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam at dolores consectetur accusamus iste reiciendis ea enim, porro vitae perferendis alias sequi ex nostrum</Text>
-            </Box>
-
-            <Box border={"1px solid black"} p={"10px"}>
-              <Text fontWeight={700} fontSize={"18px"} lineHeight={"28px"}>Mobile:-</Text>
-              <Text fontWeight={400} fontSize={"16px"} lineHeight={"24px"}>12345678901</Text>
-            </Box>
-
-            <Box border={"1px solid black"} p={"10px"}>
-              <Text fontWeight={700} fontSize={"18px"} lineHeight={"28px"}>Email:-</Text>
-              <Text fontWeight={400} fontSize={"16px"} lineHeight={"24px"}>info@example.com</Text>
-            </Box>
-          </SimpleGrid>
-
-          <SimpleGrid>
-            <form onSubmit={handleSubmit} style={{
-              display: "flex", flexDirection: "column",
-              width: "80%",
-              margin: "auto",
-              padding: "50px",
-              boxShadow: "rgba(99, 99, 99, 0.4) 0px 2px 8px 0px",
-              borderRadius: "5px"
-            }}>
-              <Heading
-                fontSize={"34px"}
-                textAlign="center"
-                mb={"20px"}
-              >
-                Contact Us
-              </Heading>
-
-              <Flex justifyContent={"space-between"}>
-
-                <FormControl isRequired>
-                  <InputBox
-                    type="text"
-                    placeholder="Your Name"
-                    value={formData.username}
-                    onChange={handleChange}
-                    name="username" label={"Name"} />
-                </FormControl>
-
-                <FormControl isRequired>
-                  <InputBox type="email"
-                    placeholder="Enter Your Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    name="email" label={"Email"} />
-                </FormControl>
-
-              </Flex>
-
-
-              <Flex justifyContent={"space-between"}>
-
-                <FormControl>
-                  <InputBox type="text"
-                    placeholder="Enter Your Mobile Number"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    name="phone" label={"Phone"} />
-                </FormControl>
-
-                <FormControl>
-                  <InputBox type="text"
-                    placeholder="Enter Your Address"
-                    value={formData.address}
-                    onChange={handleChange}
-                    name="address" label={"Address"} />
-                </FormControl>
-              </Flex>
-
-              <FormControl mt="4">
-                <FormLabel>Message</FormLabel>
-                <Textarea value={formData.message}
-                  onChange={handleChange}
-                  name="message"
-                  bg="white"
-                  width={'100%'}
-                  p={"10px"}
-                  border={"1px solid rgba(0,0,0,0.4)"}
-                  borderRadius={"5px"}
-                  mb={4} />
-              </FormControl>
-
-              <Button
-                type="submit"
-                _hover={{ bg: 'black', }}
-                padding={'10px'}
-                transition={"all .5s"}
-                bgColor={"#00254B"}
-                color={"white"}
-                border={"1px solid rgba(0,0,0,0.4)"}
-                borderRadius={"5px"}
-                mt={"5px"}
-                cursor={"pointer"}
-              >
-                Submit
-              </Button>
-            </form>
-          </SimpleGrid>
-
-        </SimpleGrid>
-
-      </SimpleGrid>
-    </Box>
+    <Container bg="#9DC4FB" maxW="full" mt={0} centerContent overflow="hidden">
+      <Flex>
+        <Box
+          bg="#02054B"
+          color="white"
+          borderRadius="lg"
+          m={{ sm: 4, md: 16, lg: 10 }}
+          p={{ sm: 5, md: 5, lg: 16 }}>
+          <Box p={4}>
+            <Wrap spacing={{ base: 20, sm: 3, md: 5, lg: 20 }}>
+              <WrapItem>
+                <Box>
+                  <Heading>Contact</Heading>
+                  <Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.500">
+                    Fill up the form below to contact
+                  </Text>
+                  <Box py={{ base: 5, sm: 5, md: 8, lg: 10 }}>
+                    <VStack pl={0} spacing={3} alignItems="flex-start">
+                      <Button
+                        size="md"
+                        height="48px"
+                        width="200px"
+                        variant="ghost"
+                        color="#DCE2FF"
+                        _hover={{ border: '2px solid #1C6FEB' }}
+                        leftIcon={<MdPhone color="#1970F1" size="20px" />}>
+                        +91-988888888
+                      </Button>
+                      <Button
+                        size="md"
+                        height="48px"
+                        width="200px"
+                        variant="ghost"
+                        color="#DCE2FF"
+                        _hover={{ border: '2px solid #1C6FEB' }}
+                        leftIcon={<MdEmail color="#1970F1" size="20px" />}>
+                        hello@abc.com
+                      </Button>
+                      <Button
+                        size="md"
+                        height="48px"
+                        width="200px"
+                        variant="ghost"
+                        color="#DCE2FF"
+                        _hover={{ border: '2px solid #1C6FEB' }}
+                        leftIcon={<MdLocationOn color="#1970F1" size="20px" />}>
+                        Karnavati, India
+                      </Button>
+                    </VStack>
+                  </Box>
+                  <HStack
+                    mt={{ lg: 10, md: 10 }}
+                    spacing={5}
+                    px={5}
+                    alignItems="flex-start">
+                    <IconButton
+                      aria-label="facebook"
+                      variant="ghost"
+                      size="lg"
+                      isRound={true}
+                      _hover={{ bg: '#0D74FF' }}
+                      icon={<MdFacebook size="28px" />}
+                    />
+                    <IconButton
+                      aria-label="github"
+                      variant="ghost"
+                      size="lg"
+                      isRound={true}
+                      _hover={{ bg: '#0D74FF' }}
+                      icon={<BsGithub size="28px" />}
+                    />
+                    <IconButton
+                      aria-label="discord"
+                      variant="ghost"
+                      size="lg"
+                      isRound={true}
+                      _hover={{ bg: '#0D74FF' }}
+                      icon={<BsDiscord size="28px" />}
+                    />
+                  </HStack>
+                </Box>
+              </WrapItem>
+              <WrapItem>
+                <Box bg="white" borderRadius="lg">
+                  <Box m={8} color="#0B0E3F">
+                    <VStack spacing={5}>
+                      <FormControl id="name">
+                        <FormLabel>Your Name</FormLabel>
+                        <InputGroup borderColor="#E0E1E7">
+                          <InputLeftElement pointerEvents="none">
+                            <BsPerson color="gray.800" />
+                          </InputLeftElement>
+                          <Input type="text" size="md" />
+                        </InputGroup>
+                      </FormControl>
+                      <FormControl id="name">
+                        <FormLabel>Mail</FormLabel>
+                        <InputGroup borderColor="#E0E1E7">
+                          <InputLeftElement pointerEvents="none">
+                            <MdOutlineEmail color="gray.800" />
+                          </InputLeftElement>
+                          <Input type="text" size="md" />
+                        </InputGroup>
+                      </FormControl>
+                      <FormControl id="name">
+                        <FormLabel>Message</FormLabel>
+                        <Textarea
+                          borderColor="gray.300"
+                          _hover={{
+                            borderRadius: 'gray.300',
+                          }}
+                          placeholder="message"
+                        />
+                      </FormControl>
+                      <FormControl id="name" float="right">
+                        <Button variant="solid" bg="#0D74FF" color="white" _hover={{}}>
+                          Send Message
+                        </Button>
+                      </FormControl>
+                    </VStack>
+                  </Box>
+                </Box>
+              </WrapItem>
+            </Wrap>
+          </Box>
+        </Box>
+      </Flex>
+    </Container>
   )
 }
 
-export default ContactUs
+
+export default ContactUs;
